@@ -12,9 +12,12 @@ USE Cougar_Search
 GO
 
 --********Object: Table 'Admin' ********--
+
+
 CREATE TABLE Admin (
 	UserName VARCHAR(25) PRIMARY KEY NOT NULL,
 	PASSWORD VARCHAR(25) NOT NULL,
+	
 );
 
 CREATE TABLE CougarUser (
@@ -22,6 +25,8 @@ CREATE TABLE CougarUser (
 	PASSWORD varchar(25) NOT NULL,
 	email varchar(25) UNIQUE NOT NULL,
 	phoneNum varchar(13) UNIQUE NOT NULL,
+	Photo VARCHAR(20) NOT NULL,
+	OwnDogID INT FOREIGN KEY REFERENCES dbo.DogProfile(ListingID ) NOT NULL
 );
 
 CREATE TABLE Moderator (
@@ -39,3 +44,16 @@ Create table DogProfile (
 	DatePosted DATETIME NOT NULL,
 	userName VARCHAR(25) FOREIGN KEY REFERENCES dbo.CougarUser(UserName) NOT NULL
 );
+
+Create table Administrator (
+	UserName varchar(25) PRIMARY KEY NOT NULL,
+	password varchar(25) NOT NULL
+);
+
+CREATE TABLE `test`.`pic` ( 
+`idpic` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT, 
+`caption` VARCHAR(45) NOT NULL, 
+`img` LONGBLOB NOT NULL, 
+PRIMARY KEY(`idpic`) 
+)
+
