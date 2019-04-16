@@ -1,0 +1,7 @@
+CREATE PROCEDURE spSearchByKeyword
+	@Keyword VARCHAR(MAX)
+AS
+SELECT
+		[Dog Name] = d.dogName
+FROM dbo.DogProfile			d
+WHERE t.isDeleted = 0 AND (CHARINDEX(@Keyword,d.DogDesc) > 0)
