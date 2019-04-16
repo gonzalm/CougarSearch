@@ -1,0 +1,29 @@
+/*****************Add Listing Procedure******************************/
+CREATE PROCEDURE spAddListing
+		@dogName varchar(25),
+		@gender VARCHAR(6),
+		@DogDesc varchar(120),
+		@Breed VARCHAR(20),
+		@Age INT,
+		@un varChar(25)
+AS 
+BEGIN 
+		INSERT INTO dbo.DogProfile
+		(	dogName,
+		    Gender,
+		    DogDesc,
+		    Breed,
+		    Age,
+		    DatePosted)
+		VALUES
+		(   @dogName,       -- dogName - varchar(25)
+			@gender,       -- dogGender - varchar(6)
+			@dogDesc,       -- DogDesc - varchar(120)
+			@Breed,       -- Breed - varchar(20)
+			@Age,        -- Age - int
+			GETDATE()) -- DatePosted - datetime
+		    
+
+
+END
+GO
