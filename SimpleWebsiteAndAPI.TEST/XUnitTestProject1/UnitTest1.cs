@@ -8,8 +8,8 @@ namespace XUnitTestProject1
         [Fact]
         public void getUserEmailTest()
         {
-            var testUser = new User("fdasfdsa", "fdasfdsa", "fdasfdsa", "fdasfdsa");
-            Assert.Equal("fdasfdsa", testUser.getemail());
+            var testUser = new User("username", "password", "test@test", "5555555555");
+            Assert.Equal("test@test", testUser.getemail());
         }
         [Fact]
         public void getDogAgeTest()
