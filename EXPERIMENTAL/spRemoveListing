@@ -1,0 +1,10 @@
+/*****************Remove Listing Procedure******************************/
+CREATE PROCEDURE spRemoveListing
+	@userName VARCHAR(25),
+	@dogName VARCHAR(50)
+AS
+BEGIN
+	DELETE row FROM dbo.DogProfile			d
+	WHERE d.userName = @userName AND d.dogName = @dogName
+	TRUNCATE TABLE DogProfile
+END

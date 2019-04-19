@@ -1,0 +1,10 @@
+
+/*****************View All Listings Procedure******************************/
+CREATE PROCEDURE spViewAllListings
+AS
+BEGIN
+	SELECT * FROM dbo.DogProfile
+
+END
+GO
+
