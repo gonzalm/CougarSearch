@@ -27,10 +27,9 @@
   <div class="clear">
 		<input type="button" value="Cancel" onclick="javascrtpt:window.location.href='user.php'">
 
-  <div class="completeSignUp">
-    <form action="db.php">
+ 
       <input type="submit" name="submit" value="submit" onclick="javascrtpt:window.location.href='personalFile.html'">
-      </form>
+      
     </div>
 </div>
 </div>
