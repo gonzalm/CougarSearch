@@ -1,6 +1,6 @@
 <?php
 <!--- need to fill ---->
-$dbHost = ''; 
+$dbHost = 'localhost'; 
 $dbUser = 'root';
 $dbPass = 'password';
 

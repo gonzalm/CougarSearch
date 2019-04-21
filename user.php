@@ -25,11 +25,11 @@
   <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
 
   <div class="clear">
-		<input type="button" value="Cancel" onclick="javascrtpt:window.location.href='nbaWebsite.html'">
+		<input type="button" value="Cancel" onclick="javascrtpt:window.location.href='user.php'">
 
   <div class="completeSignUp">
     <form action="db.php">
-      <input type="submit" name="submit" value="submit" onclick="javascrtpt:window.location.href='loggedInWebpage.html'">
+      <input type="submit" name="submit" value="submit" onclick="javascrtpt:window.location.href='personalFile.html'">
       </form>
     </div>
 </div>
@@ -39,9 +39,9 @@
 </html>
 <?php
 $servername = "localhost";
-$username = "cse383";
-$password = "HoABBHrBfXgVwMSz";
-$dbname = "cse383";
+$username = "";
+$password = "";
+$dbname = "";
 $email="";
 $usrname="";
 $psw="";
@@ -60,6 +60,6 @@ if ($conn->multi_query($sql) === TRUE) {
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
-echo "<meta http-equiv='refresh' content='1;url=loggedInWebpage.html'>";
+echo "<meta http-equiv='refresh' content='1;url=personalFile.html'>";
 $conn->close();
 ?>
