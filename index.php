@@ -38,8 +38,8 @@
         <a class="nav-link" href="browse.php" tabindex="-1" aria-disabled="true">Browse</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" action="results.php" method="get">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
@@ -53,32 +53,34 @@
 			<p class="h2 text-center">Featured Dogs</p>
 		</div>
 	</div>
+
 	<div class="row text-center">
-		<div class="col-md p-5 m-5 ColLimit border border-dark">
-			<a href="dogProfile.html" class="dogProfile">
-				<img class="img-fluid DogPic mx-auto" src="res/images/muneka.png">
-				<p class="ProfileText">Name: Muneka1</p>
-				<p>Age: Puppy</p>
-				<p>Breed: Mixed</p>
-			</a>
-		</div>
-		<div class="col-md p-5 m-5 ColLimit border border-dark">
-			<a href="dogProfile.html" class="dogProfile">
-				<img class="img-fluid DogPic mx-auto" src="res/images/muneka.png">
-				<p class="ProfileText">Name: Muneka2</p>
-				<p>Age: Older</p>
-				<p>Breed: Poodle Mix</p>
-			</a>
-		</div>
-		<div class="col-md p-5 m-5 ColLimit border border-dark">
-			<a href="dogProfile.html" class="dogProfile">
-				<img class="img-fluid DogPic mx-auto" src="res/images/muneka.png">
-				<p class="ProfileText">Name: Muneka3</p>
-				<p>Age: Young</p>
-				<p>Breed: Shitzu mix</p>
-			</a>
-		</div>
+	<?php
+	$sql = "SELECT * FROM dog_listings LIMIT 3";
+	$result = $con->query($sql);
+	$fName = "Muneka";
+	$fAge = 2;
+	$fBreed = "Mixed";
+
+	if($result->num_rows > 0) {
+		while ($row = $result->fetch_assoc()) {
+			$fName = $row["dogName"];
+			$fAge = $row["age"];
+			$fBreed = $row["breed"];
+			$listingID = $row["listingID"];
+			echo '
 	</div>
+		<div class="col-md p-5 m-5 ColLimit border border-dark">
+			<a href="dogProfile.php?listingID='.$listingID.'" class="dogProfile">
+				<img class="img-fluid DogPic mx-auto" src="res/images/muneka.png">
+				<p class="ProfileText">Name: '.$fName.'</p>
+				<p>Age: '.$fAge.'</p>
+				<p>Breed: '.$fBreed.'</p>
+			</a>
+		</div>';
+		}
+	}
+	?>
 </div>
 
 

@@ -27,9 +27,10 @@
   <div class="clear">
 		<input type="button" value="Cancel" onclick="javascrtpt:window.location.href='user.php'">
 
- 
+  <div class="completeSignUp">
+    <form action="db.php">
       <input type="submit" name="submit" value="submit" onclick="javascrtpt:window.location.href='personalFile.html'">
-      
+      </form>
     </div>
 </div>
 </div>
@@ -37,28 +38,27 @@
 </form>
 </html>
 <?php
-$servername = "localhost";
-$username = "";
-$password = "";
-$dbname = "";
-$email="";
-$usrname="";
-$psw="";
+  $host="127.0.0.1";
+  $port=3306;
+  $socket="";
+  $user="root";
+  $password="";
+  $dbname="cougar_search";
 // create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($host, $user, $password, $dbname);
 // check connection
 if ($conn->connect_error) {
     die("fail to connect: " . $conn->connect_error);
 }
 
-$sql = "INSERT INTO userinfor(email, usrname, password)
-VALUES ('$_POST[email]', '$_POST[usrname]', '$_POST[psw]');";
+$sql = "INSERT INTO users(email, username, password, phonenumber)
+VALUES ('$_POST[email]', '$_POST[username]', '$_POST[psw]', 5555555555);";
 
 if ($conn->multi_query($sql) === TRUE) {
 
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
-echo "<meta http-equiv='refresh' content='1;url=personalFile.html'>";
+//  echo "<meta http-equiv='refresh' content='1;url=personalFile.html'>";
 $conn->close();
 ?>
