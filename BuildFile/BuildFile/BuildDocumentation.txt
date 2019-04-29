@@ -1,0 +1,3 @@
+To use the build file you will first need to edit it to the appropriate path it needs to follow.
+This build file will open mySQL and a wamp server. From there you just need to open your browser and type in localhost/CougarSearch to see/use the website.
+Insure the cougar search directory is in the wamp/www directory.
