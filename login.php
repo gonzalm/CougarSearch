@@ -23,9 +23,9 @@ and open the template in the editor.
     
     $sql="select * from users where username='".$uname."'AND password='".$pw."'limit 1";
     
-    $result=mysql_query($sql);
+    $result=$con->query($sql);
     
-    if(mysql_num_rows($result)==1) {
+    if($result->num_rows==1) {
         echo "you have successfully logged in";
         exit();
     }
@@ -46,7 +46,7 @@ and open the template in the editor.
 		<div class="loginbox">
 			<img src="avi.svg" class="avatar">
 				<h1>Login Here</h1>
-				<form method = "Login" action ="#">
+				<form method = "post" action ="#">
 					<p>Username</p>
 					<input type="text" name="username" placeholder="Enter Username">
 					<p>Password</p>
