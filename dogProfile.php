@@ -36,7 +36,10 @@
       </li>
       
       <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="results.php" method="get">
@@ -57,6 +60,7 @@
   $age = 3;
   $desc = "she's a good dog";
   $userEmail = "test@test.com";
+  $picPath = "muneka.png";
 
   if($result->num_rows > 0) {
     $data = $result->fetch_assoc();
@@ -65,6 +69,7 @@
     $breed = $data["breed"];
     $age = $data["age"];
     $desc = $data["dogDesc"];
+    $picPath = $data["picture"];
     $sql = "SELECT email FROM users WHERE userID=" . $data["userID"];
     $result = $con->query($sql);
     $data = $result->fetch_assoc();
@@ -73,7 +78,7 @@
     echo "Error, no dog selected prior to visiting this page.";
   }
   ?>
-        <img class="img-fluid DogPic mx-auto" src="res/images/muneka.png">
+        <?php echo ' <img class="img-fluid DogPic mx-auto" src="res/images/'.$picPath.'"'?>>
         <p class="ProfileText">Name: <?php echo $dogName ?></p>
         <p class="ProfileText">Gender: <?php echo $gender ?></p>
         <p class="Breed">Breed: <?php echo $breed ?></p>

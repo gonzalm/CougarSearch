@@ -68,11 +68,12 @@
 			$fAge = $row["age"];
 			$fBreed = $row["breed"];
 			$listingID = $row["listingID"];
+			$picpath = $row["picture"];
 			echo '
 	</div>
 		<div class="col-md p-5 m-5 ColLimit border border-dark">
 			<a href="dogProfile.php?listingID='.$listingID.'" class="dogProfile">
-				<img class="img-fluid DogPic mx-auto" src="res/images/muneka.png">
+				<img class="img-fluid DogPic mx-auto" src="res/images/'.$picpath.'">
 				<p class="ProfileText">Name: '.$fName.'</p>
 				<p>Age: '.$fAge.'</p>
 				<p>Breed: '.$fBreed.'</p>
