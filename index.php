@@ -23,8 +23,8 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Cougar Search</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="index.php">Cougar Search</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -32,10 +32,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="browse.php" tabindex="-1" aria-disabled="true">Browse</a>
+        <a class="nav-link" href="browse.php" >Browse</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="results.php" method="get">
@@ -68,11 +68,12 @@
 			$fAge = $row["age"];
 			$fBreed = $row["breed"];
 			$listingID = $row["listingID"];
+			$picpath = $row["picture"];
 			echo '
 	</div>
 		<div class="col-md p-5 m-5 ColLimit border border-dark">
 			<a href="dogProfile.php?listingID='.$listingID.'" class="dogProfile">
-				<img class="img-fluid DogPic mx-auto" src="res/images/muneka.png">
+				<img class="img-fluid DogPic mx-auto" src="res/images/'.$picpath.'">
 				<p class="ProfileText">Name: '.$fName.'</p>
 				<p>Age: '.$fAge.'</p>
 				<p>Breed: '.$fBreed.'</p>

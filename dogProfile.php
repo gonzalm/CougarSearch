@@ -23,8 +23,8 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Cougar Search</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="index.php">Cougar Search</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -32,11 +32,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.php">Home</a>
       </li>
-      
       <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <a class="nav-link" href="browse.php" tabindex="-1">Browse</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="results.php" method="get">
@@ -57,6 +56,7 @@
   $age = 3;
   $desc = "she's a good dog";
   $userEmail = "test@test.com";
+  $picPath = "muneka.png";
 
   if($result->num_rows > 0) {
     $data = $result->fetch_assoc();
@@ -65,6 +65,7 @@
     $breed = $data["breed"];
     $age = $data["age"];
     $desc = $data["dogDesc"];
+    $picPath = $data["picture"];
     $sql = "SELECT email FROM users WHERE userID=" . $data["userID"];
     $result = $con->query($sql);
     $data = $result->fetch_assoc();
@@ -73,7 +74,7 @@
     echo "Error, no dog selected prior to visiting this page.";
   }
   ?>
-        <img class="img-fluid DogPic mx-auto" src="res/images/muneka.png">
+        <?php echo ' <img class="img-fluid DogPic mx-auto" src="res/images/'.$picPath.'"'?>>
         <p class="ProfileText">Name: <?php echo $dogName ?></p>
         <p class="ProfileText">Gender: <?php echo $gender ?></p>
         <p class="Breed">Breed: <?php echo $breed ?></p>
