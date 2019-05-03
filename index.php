@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!doctype html>
 
 <html lang="en">
@@ -12,6 +15,13 @@
 
 	$con = new mysqli($host, $user, $password, $dbname, $port, $socket)
 	or die ('Could not connect to the database server' . mysqli_connect_error());
+
+	if(isset($_SESSION["username"])) {
+		$accountTab = "<a class='nav-link' href='index.php'>".$_SESSION["username"]."</a>";
+	}
+	else {
+		$accountTab = "<a class='nav-link' href='login.php'>Login/Create Account</a>";
+	}
 	?>
   <meta charset="utf-8">
 
@@ -36,6 +46,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="browse.php" >Browse</a>
+      </li>
+      <li class="nav-item">
+      	<?php echo $accountTab; ?>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="results.php" method="get">
