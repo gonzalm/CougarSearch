@@ -18,9 +18,17 @@
 
 	if(isset($_SESSION["username"])) {
 		$accountTab = "<a class='nav-link' href='index.php'>".$_SESSION["username"]."</a>";
+		$logout = "<a class='nav-link' href='index.php?logout=TRUE'>Logout</a>";
 	}
 	else {
 		$accountTab = "<a class='nav-link' href='login.php'>Login/Create Account</a>";
+		$logout = "";
+	}
+
+	if(isset($_GET["logout"])) {
+		session_unset();
+		session_destroy();
+		header("Location:index.php");
 	}
 	?>
   <meta charset="utf-8">
@@ -49,6 +57,9 @@
       </li>
       <li class="nav-item">
       	<?php echo $accountTab; ?>
+      </li>
+      <li>
+      	<?php echo $logout; ?>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="results.php" method="get">
