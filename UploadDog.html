@@ -1,3 +1,6 @@
+<?php 
+    session_start();
+?>
 <!DOCTYPE HTML>
 <link rel="stylesheet" type="text/css" href="css/normalize.css" >
 <link rel="stylesheet" href="css/signUpForm.css" >
@@ -31,23 +34,18 @@
             </div>
         </div>
             <?php
-            $servername = "localhost";
-            $username = "";
-            $password = "";
-            $dbname = "";
-            $email="";
-            $usrname="";
-            $psw="";
-            // create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            // check connection
-            if ($conn->connect_error) {
-            die("fail to connect: " . $conn->connect_error);
-            }
-            $sql = "INSERT INTO userinfor(name, breed, sex,age)
-            VALUES ('$_POST[name]', '$_POST[breed]', '$_POST[sex]', '$_POST[age]');";
+            $host="127.0.0.1";
+            $port=3306;
+            $socket="";
+            $user="root";
+            $password="";
+            $dbname="cougar_search";
+            $con = new mysqli($host, $user, $password, $dbname, $port, $socket)
+            or die ('Could not connect to the database server' . mysqli_connect_error());
+            $sql = "INSERT INTO dog_listings(dogName, gender, breed, ,age, datePosted, userID)
+            VALUES ('$_POST[name]', '$_POST[sex]', '$_POST[breed]', '$_POST[age]', CURDATE() );";
 
-            if ($conn->multi_query($sql) === TRUE) {
+            if ($con->multi_query($sql) === TRUE) {
 
             } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
