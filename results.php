@@ -6,7 +6,7 @@
   $port=3306;
   $socket="";
     $user="root";
-  $password="";
+  $password="cougarsearch";
   $dbname="cougar_search";
 
   $con = new mysqli($host, $user, $password, $dbname, $port, $socket)
@@ -52,13 +52,13 @@ $sql = "SELECT listingID, dogDesc FROM dog_listings";
 $defquery = "SELECT * FROM dog_listings";
 $query = "SELECT * FROM dog_listings WHERE listingID=";
 	
-	if (strlen("keyword") = 0) {
-	  $result = $con->query($defquery
+	if (strlen($_GET["keyword"]) == 0) {
+	  $result = $con->query($defquery);
 		if ($result->num_rows > 0){		
 		  while($row = $result->fetch_assoc()) {
 		    echo "ID: " . $row["listingID"] . " - Name: " . $row["dogName"] . " - Age: " . $row["age"]. "<br>";
 		}
-	      } else {
+	 } else {
 		  echo "0 results";
 		}
 	}
