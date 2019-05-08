@@ -14,7 +14,7 @@ and open the template in the editor.
   $port=3306;
   $socket="";
   $user="root";
-  $password="";
+  $password="cougarsearch";
   $dbname="cougar_search";
   $con = new mysqli($host, $user, $password, $dbname, $port, $socket)
   or die ('Could not connect to the database server' . mysqli_connect_error());
@@ -23,15 +23,41 @@ and open the template in the editor.
     $uname=$_POST['username'];
     $pw=$_POST['password'];
     
+    $adminCheck = "SELECT * FROM admin WHERE username='".$uname."' AND password='".$pw."' limit 1";
+
+     $result=$con->query($adminCheck);
+    
+    if($result->num_rows==1) {
+      $data = $result->fetch_assoc();
+      echo "you have successfully logged in";
+      $_SESSION["admin"] = $uname;
+      header("Location:index.php");
+      exit();
+    }
+
+    $modCheck = "SELECT * FROM moderator WHERE username='".$uname."' AND password='".$pw."' limit 1";
+
+    $result=$con->query($modCheck);
+    
+    if($result->num_rows==1) {
+      $data = $result->fetch_assoc();
+      echo "you have successfully logged in";
+      $_SESSION["moderator"] = $uname;  
+      header("Location:index.php");
+      exit();
+    }
+
     $sql="select * from users where username='".$uname."'AND password='".$pw."'limit 1";
     
     $result=$con->query($sql);
     
     if($result->num_rows==1) {
-        echo "you have successfully logged in";
-        $_SESSION["username"] = $uname;
-        header("Location:index.php");
-        exit();
+      $data = $result->fetch_assoc();
+      echo "you have successfully logged in";
+      $_SESSION["username"] = $uname;
+      $_SESSION["userID"] = $data["userID"];
+      header("Location:index.php");
+      exit();
     }
     else{
         echo "you have entered incorrect password or username";
@@ -56,7 +82,6 @@ and open the template in the editor.
 					<p>Password</p>
 					<input type="Password" name="password" placeholder="Enter Password">
 					<input type="submit" href = "index.html" name="login_bttn" value="Login"> <br>
-					<a href="#" >Forgot your password?</a><br>
 					<a href="#">Don't Have an account? Sign Up</a>
 
 				</form>

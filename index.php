@@ -11,14 +11,20 @@
 	$port=3306;
 	$socket="";
 	$user="root";
-	$password="";
+	$password="cougarsearch";
 	$dbname="cougar_search";
 
 	$con = new mysqli($host, $user, $password, $dbname, $port, $socket)
 	or die ('Could not connect to the database server' . mysqli_connect_error());
 
-	if(isset($_SESSION["username"])) {
-		$accountTab = "<a class='nav-link' href='index.php'>".$_SESSION["username"]."</a>";
+	if(isset($_SESSION["admin"])) {
+		$accountTab = "<a class='nav-link' href='myaccount.php'>".$_SESSION["admin"]."</a>";
+		$logout = "<a class='nav-link' href='index.php?logout=TRUE'>Logout</a>";
+	} else if(isset($_SESSION["moderator"])) {
+		$accountTab = "<a class='nav-link' href='myaccount.php'>".$_SESSION["moderator"]."</a>";
+		$logout = "<a class='nav-link' href='index.php?logout=TRUE'>Logout</a>";
+	} else if(isset($_SESSION["username"])) {
+		$accountTab = "<a class='nav-link' href='myaccount.php'>".$_SESSION["username"]."</a>";
 		$logout = "<a class='nav-link' href='index.php?logout=TRUE'>Logout</a>";
 	}
 	else {
