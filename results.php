@@ -49,19 +49,32 @@
 <?php
 
 $sql = "SELECT listingID, dogDesc FROM dog_listings";
+$defquery = "SELECT * FROM dog_listings";
 $query = "SELECT * FROM dog_listings WHERE listingID=";
-$result = $con->query($sql);
-
-	if ($result->num_rows > 0) {
-		while($row = $result->fetch_assoc()) {
-			if (strchr($row["dogDesc"], $_GET["keyword"]) != false) {
-				$newRow = $con->query($query . $row["listingID"]);
-				$toDisplay = $newRow->fetch_assoc();
-				echo "Name: " . $toDisplay["dogName"] . " Age: " . $toDisplay["age"] . " Gender: " . $toDisplay["gender"] . " Description: " . $toDisplay["dogDesc"] . "<br>";
-			}
+	
+	if (strlen("keyword") = 0) {
+	  $result = $con->query($defquery
+		if ($result->num_rows > 0){		
+		  while($row = $result->fetch_assoc()) {
+		    echo "ID: " . $row["listingID"] . " - Name: " . $row["dogName"] . " - Age: " . $row["age"]. "<br>";
 		}
-	} else {
-		echo "No results found <br>";
+	      } else {
+		  echo "0 results";
+		}
+	}
+	else {
+		$result = $con->query($sql);	
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				if (strchr($row["dogDesc"], $_GET["keyword"]) != false) {
+					$newRow = $con->query($query . $row["listingID"]);
+					$toDisplay = $newRow->fetch_assoc();
+					echo "Name: " . $toDisplay["dogName"] . " Age: " . $toDisplay["age"] . " Gender: " . $toDisplay["gender"] . " Description: " . $toDisplay["dogDesc"] . "<br>";
+				}
+			}
+		} else {
+			echo "No results found <br>";
+		}
 	}
 
 ?>
