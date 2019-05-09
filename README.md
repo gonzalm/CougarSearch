@@ -21,8 +21,10 @@ Cougar Search uses moderators and administrators to keep dog profiles up to date
   ``` 
   ## Languages
    PHP was used to deal with all the backend functionality and to connect to the database. To create the database, SQL was used. HTML and CSS was used for creating the frontend functionailty/what the user will see. CSS was used for formatting the different pages. 
+## Database Setup
+  When creating the database with mysql, ensure you use legacy authentication, PHP does not yet support mysql 8.0 authentication. To import the database with mysql workbench, go to System->Import Data, select the option to use a single file, then in the CougarSearch direction under res/database, select the DBCreationScript.sql. workbench may give you an error or "hang" once you import, but once you restart workbench you should see the cougar_search schema on the left.
 ## Build File
   To use the build file you will first need to edit it to the appropriate path it needs to follow.
 This build file will open mySQL, wamp server, and the default system browser to localhost/CougarSearch. 
-Insure the cougar search directory is in the wamp/www directory.
+Ensure the cougar search directory is in the wamp/www directory.
 ##Authors
