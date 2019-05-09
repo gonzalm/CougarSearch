@@ -56,11 +56,14 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="index.php">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="browse.php" >Browse</a>
+      </li>
+      <li>
+      	<a class="nav-link" href="about.php">About</a>
       </li>
       <li class="nav-item">
       	<?php echo $accountTab; ?>
@@ -75,44 +78,69 @@
     </form>
   </div>
 </nav>
-<div class="container">
-	
-</div>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col p-5">
-			<p class="h2 text-center">Featured Dogs</p>
-		</div>
-	</div>
 
-	<div class="row text-center">
+
+<h2 style="text-align:center;">Cougar Search</h2>
+<p style ="text-align:center;">Featured dogs of the week</p>
+
+<div class="slideshow-container">
 	<?php
 	$sql = "SELECT * FROM dog_listings LIMIT 3";
 	$result = $con->query($sql);
 	$fName = "Muneka";
-	$fAge = 2;
-	$fBreed = "Mixed";
 
 	if($result->num_rows > 0) {
+		$counter = 0;
 		while ($row = $result->fetch_assoc()) {
 			$fName = $row["dogName"];
-			$fAge = $row["age"];
-			$fBreed = $row["breed"];
 			$listingID = $row["listingID"];
 			$picpath = $row["picture"];
+			$counter++;
 			echo '
-	</div>
-		<div class="col-md p-5 m-5 ColLimit border border-dark">
-			<a href="dogProfile.php?listingID='.$listingID.'" class="dogProfile">
-				<img class="img-fluid DogPic mx-auto" src="res/images/'.$picpath.'">
-				<p class="ProfileText">Name: '.$fName.'</p>
-				<p>Age: '.$fAge.'</p>
-				<p>Breed: '.$fBreed.'</p>
-			</a>
-		</div>';
+
+				<div class="mySlides fade">
+  					<a href="dogProfile.php?listingID="'.$listingID.'>
+  					<div class="numbertext">'.$counter.' / 3</div>
+ 				 	<img src="res/images/'.$picpath.'" style="width:100%">
+  					<div class="text">'.$fName.'</div>
+ 	 				</a>
+				</div>
+			';
+
 		}
 	}
 	?>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+</div>
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
 </div>
 
 

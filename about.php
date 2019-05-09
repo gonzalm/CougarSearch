@@ -40,7 +40,7 @@
   ?>
   <meta charset="utf-8">
 
-  <title>Cougar Search</title>
+  <title>About</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -78,45 +78,13 @@
     </form>
   </div>
 </nav>
-
-<h1>Results</h1>
-
-<?php
-
-$sql = "SELECT listingID, dogDesc FROM dog_listings";
-$defquery = "SELECT * FROM dog_listings";
-$query = "SELECT * FROM dog_listings WHERE listingID=";
-	
-	if (strlen($_GET["keyword"]) == 0) {
-	  $result = $con->query($defquery);
-		if ($result->num_rows > 0){		
-		  while($row = $result->fetch_assoc()) {
-		    echo "ID: " . $row["listingID"] . " - Name: " . $row["dogName"] . " - Age: " . $row["age"]. "<br>";
-		}
-	 } else {
-		  echo "0 results";
-		}
-	}
-	else {
-		$result = $con->query($sql);	
-		if ($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()) {
-				if (strchr($row["dogDesc"], $_GET["keyword"]) != false) {
-					$newRow = $con->query($query . $row["listingID"]);
-					$toDisplay = $newRow->fetch_assoc();
-					echo "Name: " . $toDisplay["dogName"] . " Age: " . $toDisplay["age"] . " Gender: " . $toDisplay["gender"] . " Description: " . $toDisplay["dogDesc"] . "<br>";
-				}
-			}
-		} else {
-			echo "No results found <br>";
-		}
-	}
-
-?>
-
-
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
+	<div class="container AboutPage">
+		<h1>About Cougar Search!</h1>
+		<img src="res/images/9.jpg">
+		<br/>
+		<p>Cougar Search is for potentional listers and adopters to post and browse through dogs that need to be adopted.</p>
+		<p>Anyone can use Cougar Search to browse dog profiles, but only registered users can list their dogs and contact other users through the listed email. All dog profiles will have to be approved by the administrator before the dog profile is uploaded so please expect a 24 hour period before new dogs are posted.</p>
+		<p>Cougar Search uses moderators and administrators to keep dog profiles up to date and ensure appropriate use of the site.</p>
+	</div>
+	</body>
 </html>

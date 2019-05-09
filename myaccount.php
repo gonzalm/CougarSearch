@@ -1,21 +1,21 @@
 <?php
-	session_start();
+  session_start();
 ?>
 <!doctype html>
 
 <html lang="en">
 <head>
 
-	<?php
-	$host="127.0.0.1";
-	$port=3306;
-	$socket="";
-	$user="root";
-	$password="cougarsearch";
-	$dbname="cougar_search";
+  <?php
+  $host="127.0.0.1";
+  $port=3306;
+  $socket="";
+  $user="root";
+  $password="cougarsearch";
+  $dbname="cougar_search";
 
-	$con = new mysqli($host, $user, $password, $dbname, $port, $socket)
-	or die ('Could not connect to the database server' . mysqli_connect_error());
+  $con = new mysqli($host, $user, $password, $dbname, $port, $socket)
+  or die ('Could not connect to the database server' . mysqli_connect_error());
 
   if(isset($_SESSION["admin"])) {
     $accountTab = "<a class='nav-link' href='myaccount.php'>".$_SESSION["admin"]."</a>";
@@ -32,13 +32,12 @@
     $logout = "";
   }
 
-	if(isset($_GET["logout"])) {
-		session_unset();
-		session_destroy();
-		header("Location:index.php");
-	}
-
-	?>
+  if(isset($_GET["logout"])) {
+    session_unset();
+    session_destroy();
+    header("Location:index.php");
+  }
+  ?>
   <meta charset="utf-8">
 
   <title>Cougar Search</title>
@@ -57,17 +56,20 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="index.php">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="browse.php" >Browse</a>
       </li>
+      <li>
+        <a class="nav-link" href="about.php">About</a>
+      </li>
       <li class="nav-item">
-      	<?php echo $accountTab; ?>
+        <?php echo $accountTab; ?>
       </li>
       <li>
-      	<?php echo $logout; ?>
+        <?php echo $logout; ?>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="results.php" method="get">
