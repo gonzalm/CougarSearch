@@ -14,6 +14,7 @@
 	  if ($conn->connect_error) {
 	    die("fail to connect: " . $conn->connect_error);
 	  }
+	  // Checks if something has been submitted, and if it has been, enter information into database
 	  if(isset($_POST["user_name"])) {
 	  	$sql = "INSERT INTO users(username, email, password, phonenumber)
 	  	VALUES ('".$_POST['user_name']."', '".$_POST['email_address']."', '".$_POST['pass_word']."', '".$_POST['phone_num']."');";
@@ -22,7 +23,6 @@
 	    	echo "Error: " . $sql . "<br>" . $conn->error;
 	  	}
 	}
-	  //  echo "<meta http-equiv='refresh' content='1;url=personalFile.html'>";
 	  $conn->close();
 	?>
 	
@@ -31,7 +31,7 @@
 		Sign Up Form 
 	</title>
 	<link rel="stylesheet" type="text/css" href="res/css/style.css">
-	<body style="background: url(Dogs.jpg) no-repeat; background-size: 100%;" >
+	<body style="background: url(Dogs.jpg) no-repeat; background-size: 100%;" > <!-- Actual form for signing up -->
 		<div class="signupbox">
 			<img src="avi.svg" class="avatar">
 				<h1>Sign Up Here</h1>

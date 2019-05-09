@@ -19,6 +19,7 @@ and open the template in the editor.
   $con = new mysqli($host, $user, $password, $dbname, $port, $socket)
   or die ('Could not connect to the database server' . mysqli_connect_error());
   
+  // If the user has submitted something, goes through several checks to determine if the entered information is: an admin, a moderator, or a user. If no matches, tell user something is wrong
   if(isset($_POST['username'])){
     $uname=$_POST['username'];
     $pw=$_POST['password'];

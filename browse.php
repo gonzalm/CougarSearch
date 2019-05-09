@@ -84,7 +84,7 @@
 
 $sql = "SELECT * FROM dog_listings";
 $result = $con->query($sql);
-
+// Display all dogs with button for more information, button leads to dog's profile (using $_GET)
 if ($result->num_rows >0) {
   echo "<form action='dogProfile.php' method='GET'>";
   while($row = $result->fetch_assoc()) {

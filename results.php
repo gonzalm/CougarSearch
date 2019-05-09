@@ -87,6 +87,7 @@ $sql = "SELECT listingID, dogDesc FROM dog_listings";
 $defquery = "SELECT * FROM dog_listings";
 $query = "SELECT * FROM dog_listings WHERE listingID=";
 	
+  // Checks if the user just clicked the search button without typing anything, and then uses the browse page functionality to display all dogs
 	if (strlen($_GET["keyword"]) == 0) {
 	  $result = $con->query($defquery);
 		if ($result->num_rows > 0){		
@@ -100,6 +101,7 @@ $query = "SELECT * FROM dog_listings WHERE listingID=";
 		}
 	}
 	else {
+    // Otherwise, go through all dogs and if the keyword from the search is contained in the description, display that dog, otherwise don't
 		$result = $con->query($sql);	
 		if ($result->num_rows > 0) {
       echo "<form action='dogProfile.php' method='GET'>";
@@ -112,6 +114,7 @@ $query = "SELECT * FROM dog_listings WHERE listingID=";
 			}
       echo "</form>";
 		} else {
+      // No dogs in the database, probably a big issue
 			echo "No results found <br>";
 		}
 	}

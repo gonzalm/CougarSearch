@@ -80,27 +80,31 @@
 </nav>
   <div class="container-fluid">
   <?php 
-
+  // If a mod was 'removed' (admin clicked remove button), actually remove the mod
   if(isset($_GET["removeMod"])) {
     $sql = "DELETE FROM moderator WHERE username='".$_GET['removeMod']."'";
     if ($con->query($sql) === TRUE) {
       echo "Removal Succesful";
     }
     else {
+      // For debugging
       echo "Error deleting moderator ". $_GET['removeMod']. " : ".$con->error;
     }
   }
 
+  // Checks if dog listing was 'removed' (user clicked remove button) and removes said dog.
   if(isset($_GET["removeDog"])) {
     $sql = "DELETE FROM dog_listings WHERE listingID=".$_GET['removeDog']."";
     if ($con->query($sql) === TRUE) {
       echo "Removal Succesful";
     }
     else {
+      // For debugging
       echo "Error deleting moderator ". $_GET['removeMod']. " : ".$con->error;
     }
   }
 
+  // If $_POST (method for submitting updated dog info) has the update dog variable set (to the dog's listing id), then check if each field was set, and update in the database accordingly
   if(isset($_POST["updateDog"])) {
     if(isset($_POST["name"])) {
       $sql = "UPDATE dog_listings SET dogName='".$_POST['name']."' WHERE listingID=".$_POST['updateDog'];
@@ -137,6 +141,7 @@
     header("Location:dogProfile.php?listingID=".$_POST['updateDog']);
   }
 
+  // If user clicked the update dog button, $_GET will have the dog's listing id to pass to the POST method once the user submits the displayed form (displayed using this echo statement below)
   if(isset($_GET["updateDog"])) {
     echo '
     <form  method="POST" action="myaccount.php">
@@ -157,6 +162,7 @@
     exit();
   }
 
+  // If the session contains an admin logged in, display the admin panel (ability to delete mods and dog listings)
   if (isset($_SESSION["admin"])) {
     echo "<h2>Moderators</h2><br>";
     $query = "SELECT * FROM moderator";
@@ -185,6 +191,7 @@
     } else {
       echo "0 results";
     }
+  // If session contains a mod logged in, display mod panel (ability to remove any listing)
   } else if(isset($_SESSION["moderator"])) {
 
     echo "<h2>Current Listings</h2>";
@@ -201,6 +208,7 @@
       echo "0 results";
     }
 
+  // If it isn't a mod or admin, it's a user, display user panel (remove/update own dogs, create new listing)
   } else {
 
 

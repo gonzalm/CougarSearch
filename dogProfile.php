@@ -83,7 +83,7 @@
   <?php 
   $sql = "SELECT * FROM dog_listings WHERE listingID=". $_GET["listingID"];
   $result = $con->query($sql);
-
+  // Defaults just in case
   $dogName = "Muneka";
   $gender = "Female";
   $breed = "Mixed";
@@ -91,7 +91,7 @@
   $desc = "she's a good dog";
   $userEmail = "test@test.com";
   $picPath = "muneka.png";
-
+  // Displays all of the dog's information (dog ID retrieved from previous page using $_GET [so from the url i.e. dogProfile.php?listingID=2])
   if($result->num_rows > 0) {
     $data = $result->fetch_assoc();
     $dogName = $data["dogName"];
