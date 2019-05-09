@@ -42,7 +42,7 @@
   $port=3306;
   $socket="";
   $user="root";
-  $password="";
+  $password="cougarsearch";
   $dbname="cougar_search";
 // create connection
 $conn = new mysqli($host, $user, $password, $dbname);

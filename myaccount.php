@@ -37,6 +37,7 @@
 		session_destroy();
 		header("Location:index.php");
 	}
+
 	?>
   <meta charset="utf-8">
 
@@ -75,17 +76,129 @@
     </form>
   </div>
 </nav>
-  
+  <div class="container-fluid">
   <?php 
-  if (isset($_SESSION["admin"])) {
-    echo "<h2>Moderators</h2><br>";
-    $query = "SELECT * FROM 'moderator'";
-    $result = con->query($query);
-    if ($row->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-        echo "User: ".$row["username"]."";
+
+  if(isset($_GET["removeMod"])) {
+    $sql = "DELETE FROM moderator WHERE username='".$_GET['removeMod']."'";
+    if ($con->query($sql) === TRUE) {
+      echo "Removal Succesful";
+    }
+    else {
+      echo "Error deleting moderator ". $_GET['removeMod']. " : ".$con->error;
+    }
+  }
+
+  if(isset($_GET["removeDog"])) {
+    $sql = "DELETE FROM dog_listings WHERE listingID=".$_GET['removeDog']."";
+    if ($con->query($sql) === TRUE) {
+      echo "Removal Succesful";
+    }
+    else {
+      echo "Error deleting moderator ". $_GET['removeMod']. " : ".$con->error;
+    }
+  }
+
+  if(isset($_POST["updateDog"])) {
+    if(isset($_POST["name"])) {
+      $sql = "UPDATE dog_listings SET dogName='".$_POST['name']."' WHERE listingID=".$_POST['updateDog'];
+      if($con->query($sql)===TRUE) {
+        echo "Update Successful";
+      } else {
+        echo "Update failed: ".$con->error;
       }
     }
+    if (isset($_POST["sex"])) {
+      $sql = "UPDATE dog_listings SET gender='".$_POST['sex']."' WHERE listingID=".$_POST['updateDog'];
+      if($con->query($sql)===TRUE) {
+        echo "Update Successful";
+      } else {
+        echo "Update failed: ".$con->error;
+      }
+    }
+    if (isset($_POST["breed"])) {
+      $sql = "UPDATE dog_listings SET breed='".$_POST['breed']."' WHERE listingID=".$_POST['updateDog'];
+      if($con->query($sql)===TRUE) {
+        echo "Update Successful";
+      } else {
+        echo "Update failed: ".$con->error;
+      }
+    }
+    if (isset($_POST["age"])) {
+      $sql = "UPDATE dog_listings SET age=".$_POST['age']." WHERE listingID=".$_POST['updateDog'];
+      if($con->query($sql)===TRUE) {
+        echo "Update Successful";
+      } else {
+        echo "Update failed: ".$con->error;
+      }
+    }
+    header("Location:dogProfile.php?listingID=".$_POST['updateDog']);
+  }
+
+  if(isset($_GET["updateDog"])) {
+    echo '
+    <form  method="POST" action="myaccount.php">
+          
+            <label for="name"><b>Name</b></label>
+            <input type="name" placeholder="Enter Name" name="name" required>
+          
+            <label for="breed"><b>Breed</b></label>
+            <input type="breed" placeholder="Enter Breed" name="breed" required>
+          
+            <label for="sex"><b>Sex</b></label>
+            <input type="sex" placeholder="Enter Sex" name="sex" required>
+          
+            <label for="age"><b>Age</b></label>
+            <input type="age" placeholder="Age" name="age" required>
+
+            <button name="updateDog" type="submit" value="'.$_GET["updateDog"].'">Submit</button>';
+    exit();
+  }
+
+  if (isset($_SESSION["admin"])) {
+    echo "<h2>Moderators</h2><br>";
+    $query = "SELECT * FROM moderator";
+    $result = $con->query($query);
+    if ($result->num_rows > 0) {
+      echo "<form action='myaccount.php' method='get'>";
+      while ($row = $result->fetch_assoc()) {
+        echo "Mod: ".$row["username"]." <button name='removeMod' type='submit' value='".$row["username"]."'>REMOVE MOD</button> <br>";
+      }
+      echo "</form>";
+    }
+    else {
+      echo "No moderators to display";
+    }
+
+    echo "<h2>Current Listings</h2>";
+    $query = "SELECT * FROM dog_listings";
+    $result = $con->query($query);
+
+    if ($result->num_rows >0) {
+      echo "<form action='myaccount.php' method='get'>";
+      while($row = $result->fetch_assoc()) {
+        echo "ID: " . $row["listingID"] . " - Name: " . $row["dogName"] . " - Age: " . $row["age"]. " <button name='removeDog' type='submit' value='".$row["listingID"]."'>REMOVE LISTING</button> <br>";
+      }
+      echo "</form>";
+    } else {
+      echo "0 results";
+    }
+  } else if(isset($_SESSION["moderator"])) {
+
+    echo "<h2>Current Listings</h2>";
+    $query = "SELECT * FROM dog_listings";
+    $result = $con->query($query);
+
+    if ($result->num_rows >0) {
+      echo "<form action='myaccount.php' method='get'>";
+      while($row = $result->fetch_assoc()) {
+        echo "ID: " . $row["listingID"] . " - Name: " . $row["dogName"] . " - Age: " . $row["age"]. " <button name='removeDog' type='submit' value='".$row["listingID"]."'>REMOVE LISTING</button> <br>";
+      }
+      echo "</form>";
+    } else {
+      echo "0 results";
+    }
+
   } else {
 
 
@@ -95,17 +208,23 @@
 
   if ($result->num_rows >0) {
 
+      echo "<form action='myaccount.php' method='get'>";
     while($row = $result->fetch_assoc()) {
-      echo "ID: " . $row["listingID"] . " - Name: " . $row["dogName"] . " - Age: " . $row["age"]. "<br>";
+      echo "ID: " . $row["listingID"] . " - Name: " . $row["dogName"] . " - Age: " . $row["age"]. " <button name='removeDog' type='submit' value='".$row["listingID"]."'>REMOVE LISTING</button>
+      <button name='updateDog' type='submit' value='".$row["listingID"]."'>UPDATE LISTING</button> <br>";
     }
+      echo "</form>";
   } else {
     echo "0 results";
   }
+  echo "
+   <h2>Options</h2>
+   <a href='uploadDog.php'>Add a new listing</a>";
+
 }
    ?>
 
-   <h2>Options</h2>
-   <a href="uploadDog.php">Add a new listing</a>
+ </div>
 
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
