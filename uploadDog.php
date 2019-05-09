@@ -79,6 +79,24 @@
   </div>
 </nav>
 <body>
+
+    <?php 
+    if(isset($_POST['name'])) {
+
+        $sql = "INSERT INTO dog_listings(dogName, gender, breed, age, datePosted, userID, dogDesc)
+
+        VALUES ('".$_POST['name']."', '".$_POST['sex']."', '".$_POST['breed']."', ".$_POST['age'].", CURDATE(), ".$_SESSION['userID'].", 'Name: ".$_POST['name']." Age: ".$_POST['age']." Breed: ".$_POST['breed']." Gender: ".$_POST['sex']."');";
+
+        if ($con->query($sql) === TRUE) {
+
+        } else {
+
+        echo "Error: " . $sql . "<br>" . $con->error;
+
+        }
+
+    }
+    ?>
     <form  method="POST" action='#'>
     <div align="center">
             <h1>Upload the dog file here:</h1>

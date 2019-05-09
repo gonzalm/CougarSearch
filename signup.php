@@ -46,8 +46,8 @@
 					<input type="Phone" name="phone_num" placeholder="PhoneNumber">
 					<input type="submit" href = "login.php" name="" value="Get Started"> <br>
 
-					<a href="#" >Just Want to Browse? Click Here</a><br>
-					<a href="#">Already Have an account? Sign IN</a>
+					<a href="browse.php" >Just Want to Browse? Click Here</a><br>
+					<a href="login.php">Already Have an account? Sign IN</a>
 
 				</form>
 

@@ -99,7 +99,7 @@
 			echo '
 
 				<div class="mySlides fade">
-  					<a href="dogProfile.php?listingID="'.$listingID.'>
+  					<a href="dogProfile.php?listingID='.$listingID.'">
   					<div class="numbertext">'.$counter.' / 3</div>
  				 	<img src="res/images/'.$picpath.'" style="width:100%">
   					<div class="text">'.$fName.'</div>

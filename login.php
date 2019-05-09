@@ -82,7 +82,8 @@ and open the template in the editor.
 					<p>Password</p>
 					<input type="Password" name="password" placeholder="Enter Password">
 					<input type="submit" href = "index.html" name="login_bttn" value="Login"> <br>
-					<a href="#">Don't Have an account? Sign Up</a>
+					<a href="signup.php">Don't Have an account? Sign Up</a> <br>
+          <a href="browse.php">Just Browsing?</a>
 
 				</form>
 
