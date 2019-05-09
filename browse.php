@@ -77,7 +77,7 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
-</nav>
+</nav> <!-- End of navbar -->
 <h1>Our Lovely Dogs</h1> 
 <div class="container-fluid">
 <?php
