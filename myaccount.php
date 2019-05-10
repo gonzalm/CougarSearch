@@ -220,7 +220,7 @@
 
       echo "<form action='myaccount.php' method='get'>";
     while($row = $result->fetch_assoc()) {
-      echo "ID: " . $row["listingID"] . " - Name: " . $row["dogName"] . " - Age: " . $row["age"]. " <button name='removeDog' type='submit' value='".$row["listingID"]."'>REMOVE LISTING</button>
+      echo "Name: " . $row["dogName"] . " - Age: " . $row["age"]. " <button name='removeDog' type='submit' value='".$row["listingID"]."'>REMOVE LISTING</button>
       <button name='updateDog' type='submit' value='".$row["listingID"]."'>UPDATE LISTING</button> <br>";
     }
       echo "</form>";
