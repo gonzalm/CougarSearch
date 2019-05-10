@@ -48,7 +48,7 @@
 </head>
 <!-- Simple about page, no fancy php other than navbar logic for logged in users -->
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light"><!-- Start of the navbar present on every page (except login and signup) -->
   <a class="navbar-brand" href="index.php">Cougar Search</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -77,7 +77,7 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
-</nav>
+</nav> <!-- end of navbar-->
 	<div class="container AboutPage">
 		<h1>About Cougar Search!</h1>
 		<img src="res/images/9.jpg">
