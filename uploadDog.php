@@ -82,14 +82,50 @@
 
     <?php 
     // checks if name was submitted (name is the first field, in reality it doesn't matter which field it checks as all are)
-    if(isset($_POST['name'])) {
+
+    if(isset($_POST['submit'])) {
+
+        $targetDir = "res/images/";
+        $targetFile = $targetDir . basename($_FILES["pic"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+        $check = getimagesize($_FILES["pic"]["tmp_name"]);
+        if($check !== false) {
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
+            exit();
+        }
+
+
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+        echo "Sorry, only JPG, JPEG, & PNG files are allowed.";
+        $uploadOk = 0;
+    }
+
+
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+        exit();
+    }
         // Query to insert new dog into database table
         $sql = "INSERT INTO dog_listings(dogName, gender, breed, age, datePosted, userID, dogDesc)
 
         VALUES ('".$_POST['name']."', '".$_POST['sex']."', '".$_POST['breed']."', ".$_POST['age'].", CURDATE(), ".$_SESSION['userID'].", 'Name: ".$_POST['name']." Age: ".$_POST['age']." Breed: ".$_POST['breed']." Gender: ".$_POST['sex']."');";
 
         if ($con->query($sql) === TRUE) {
+        $sql = "SELECT listingID FROM dog_listings ORDER BY listingID DESC LIMIT 1"; 
+        $result = $con->query($sql);
+        $data = $result->fetch_assoc();
+        if (move_uploaded_file($_FILES["pic"]["tmp_name"], "res/images/".$data["listingID"].".".$imageFileType)) {
+            $sql = "UPDATE dog_listings SET picture='".$data['listingID'].".".$imageFileType."' WHERE listingID=".$data['listingID'];
+            if($con->query($sql)) {
 
+            }
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
         } else {
 
         echo "Error: " . $sql . "<br>" . $con->error;
@@ -99,7 +135,7 @@
     }
     ?>
     <!-- Form for submitting new dog -->
-    <form  method="POST" action='#'>
+    <form  method="POST" action='#' enctype="multipart/form-data">
     <div align="center">
             <h1>Upload the dog file here:</h1>
             <p>Please fill in this form to upload a dog file.</p>
@@ -116,6 +152,9 @@
           
             <label for="age"><b>Age</b></label>
             <input type="age" placeholder="Age" name="age" required>
+
+            <label for="pic">Picture (JPG, JPEG, or PNG</label>
+            <input type="file" name="pic" id="pic">
             <div class="submit">
                 <input type="submit" name="submit" value="submit" onclick="javascrtpt:window.location.href='uploadDog.php'">
             </div>
